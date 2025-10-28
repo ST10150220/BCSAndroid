@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "611326558817",
+    "project_id": "browns-construction-service",
+    "storage_bucket": "browns-construction-service.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611326558817:android:a3d40c6da4a4090ee9e020",
+        "android_client_info": {
+          "package_name": "browns.constructions"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfxgg0ECOWmE5lAsAUZoX3DMlIJ6SxUqY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611326558817:android:46747233cff9df47e9e020",
+        "android_client_info": {
+          "package_name": "student.projects.bcsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfxgg0ECOWmE5lAsAUZoX3DMlIJ6SxUqY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
