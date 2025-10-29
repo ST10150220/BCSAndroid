@@ -1,63 +1,103 @@
 package network
 
+
 import retrofit2.Call
 import retrofit2.http.*
 
+// -------- DATA CLASSES --------
 data class Invoice(
     val id: String? = null,
-    val amount: Double,
-    val description: String,
-    val date: String
+    val clientName: String? = null,
+    val quotationId: String? = null,
+    val items: List<String>? = null,
+    val totalAmount: Double,
+    val dueDate: String,
+    val paymentMethod: String? = null,
+    val paymentStatus: String? = null
 )
 
 data class Maintenance(
-    val id: String? = null,
-    val title: String,
-    val description: String,
-    val status: String
+    val id: String?= null,
+    val clientName: String?= null,
+    val contractorName: String? = null,
+    val createdAt: String?= null,
+    val description: String?= null,
+    val imageUrl: String? = null,
+    val status: String?= null
+)
+
+data class MaintenanceResponse(
+    val success: Boolean,
+    val data: List<Maintenance>
 )
 
 data class Message(
+    val id: String? = null,
     val senderId: String,
     val receiverId: String,
-    val content: String,
-    val timestamp: String? = null
+    val projectId: String? = null,
+    val subject: String? = null,
+    val body: String,
+    val isRead: Boolean? = null
 )
 
+
+// -------- API SERVICE --------
 interface ApiService {
 
     // -------- INVOICES --------
-    @GET("invoices")
+    @GET("invoice/all")
     fun getAllInvoices(): Call<List<Invoice>>
 
-    @GET("invoices/{id}")
+    @GET("invoice/{id}")
     fun getInvoiceById(@Path("id") id: String): Call<Invoice>
 
-    @POST("invoices")
+    @POST("invoice/create")
     fun createInvoice(@Body invoice: Invoice): Call<Invoice>
 
-    @DELETE("invoices/{id}")
+    @PUT("invoice/update/{id}")
+    fun updateInvoiceStatus(
+        @Path("id") id: String,
+        @Body status: Map<String, String>
+    ): Call<Void>
+
+    @DELETE("invoice/delete/{id}")
     fun deleteInvoice(@Path("id") id: String): Call<Void>
+
+    @POST("invoice/paypal/create-order")
+    fun createPaypalOrder(@Body data: Map<String, String>): Call<Map<String, Any>>
+
+    @POST("invoice/paypal/capture-payment")
+    fun capturePaypalPayment(@Body data: Map<String, String>): Call<Map<String, Any>>
 
 
     // -------- MAINTENANCE --------
-    @GET("maintenance")
-    fun getAllMaintenance(): Call<List<Maintenance>>
+    @GET("maintenance/all")
+    fun getAllMaintenance(): Call<MaintenanceResponse>
 
-    @GET("maintenance/{id}")
-    fun getMaintenanceById(@Path("id") id: String): Call<Maintenance>
-
-    @POST("maintenance")
+    @POST("maintenance/create")
     fun createMaintenance(@Body maintenance: Maintenance): Call<Maintenance>
+
+    @PATCH("maintenance/assign/{id}")
+    fun assignContractor(
+        @Path("id") id: String,
+        @Body contractor: Map<String, String>
+    ): Call<Void>
+
+    @PATCH("maintenance/update/{id}")
+    fun updateMaintenanceStatus(
+        @Path("id") id: String,
+        @Body status: Map<String, String>
+    ): Call<Void>
 
 
     // -------- MESSAGES --------
-    @GET("messages/{senderId}/{receiverId}")
-    fun getMessages(
-        @Path("senderId") senderId: String,
-        @Path("receiverId") receiverId: String
-    ): Call<List<Message>>
-
-    @POST("messages")
+    @POST("messages/send")
     fun sendMessage(@Body message: Message): Call<Message>
+
+    @GET("messages/user/{userId}")
+    fun getUserMessages(@Path("userId") userId: String): Call<List<Message>>
+
+    @PUT("messages/read/{messageId}")
+    fun markMessageRead(@Path("messageId") messageId: String): Call<Void>
 }
