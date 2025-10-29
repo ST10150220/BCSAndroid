@@ -55,7 +55,7 @@ class RegisterUserActivity : AppCompatActivity() {
 
                         db.collection("Users").document(userId).set(user)
                             .addOnSuccessListener {
-                                Toast.makeText(this, "User Regeistered Succesfully", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "User Registered Successfully", Toast.LENGTH_SHORT).show()
                                 etName.text.clear()
                                 etEmail.text.clear()
                                 etPassword.text.clear()
