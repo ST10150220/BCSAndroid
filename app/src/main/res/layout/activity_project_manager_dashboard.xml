@@ -1,38 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#000000"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProjectManagerDashboardActivity">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F9F9F9">
 
-    <!-- Header -->
     <TextView
-        android:id="@+id/tvTitle"
-        android:text="Maintenance Requests"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="12dp"
+        android:id="@+id/titlePMDashboard"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <!-- Optional filter spinner -->
-    <Spinner
-        android:id="@+id/spinnerFilter"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/filter_options"
-        android:layout_marginBottom="8dp" />
+        android:text="Project Manager Dashboard"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="8dp" />
 
-    <!-- RecyclerView for maintenance requests -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerRequests"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:paddingTop="8dp"
+        android:clipToPadding="false"
         android:scrollbars="vertical" />
-
 </LinearLayout>
