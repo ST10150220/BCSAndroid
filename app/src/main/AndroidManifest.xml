@@ -38,6 +38,11 @@
             android:name=".ProjectManagerDashboardActivity"
             android:exported="false"
             android:theme="@style/Theme.BCSApp" />
+
+        <activity
+            android:name=".ClientDashboardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BCSApp" />
     </application>
 
 </manifest>
