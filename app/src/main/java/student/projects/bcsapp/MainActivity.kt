@@ -65,6 +65,16 @@ class MainActivity : AppCompatActivity() {
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     val role = document.getString("role")?.lowercase()
+                    val email = document.getString("email") ?: ""
+                    val name = document.getString("name") ?: ""
+
+                    val sharedPrefs = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+                    val editor = sharedPrefs.edit()
+                    editor.putString("userEmail", email)
+                    editor.putString("userName", name)
+                    editor.putString("userRole", role)
+                    editor.apply()
+
                     when (role) {
                         "admin" -> {
                             Toast.makeText(this, "Welcome admin", Toast.LENGTH_SHORT).show()
