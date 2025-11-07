@@ -1,6 +1,7 @@
 package student.projects.bcsapp
 
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
@@ -20,6 +21,15 @@ class ClientDashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityClientDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val sharedPrefs = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+        val userName = sharedPrefs.getString("userName", "User")
+
+        val tvUserName = findViewById<TextView>(R.id.tvUserName)
+        val tvGreeting = findViewById<TextView>(R.id.tvGreeting)
+
+        tvGreeting.text = "Welcome back,"
+        tvUserName.text = userName
 
         val uid = auth.currentUser?.uid
         if (uid != null) {

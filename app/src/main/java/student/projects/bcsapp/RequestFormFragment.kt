@@ -20,7 +20,7 @@ class RequestFormFragment : Fragment() {
 
     private var _binding: FragmentRequestFormBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapter: ClientRequestAdapter
+    //private lateinit var adapter: ClientRequestAdapter
     private var clientName: String = ""
 
     companion object {
@@ -51,12 +51,12 @@ class RequestFormFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize RecyclerView adapter
-        adapter = ClientRequestAdapter(emptyList())
-        binding.requestsRecyclerView.adapter = adapter
-
-        // Load the client's existing requests
-        fetchClientRequests()
+//        // Initialize RecyclerView adapter
+//        adapter = ClientRequestAdapter(emptyList())
+//        binding.requestsRecyclerView.adapter = adapter
+//
+//        // Load the client's existing requests
+//        fetchClientRequests()
 
         // Get stored user details from SharedPreferences
         val sharedPrefs = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
@@ -157,7 +157,7 @@ class RequestFormFragment : Fragment() {
                     // Filter only this client's requests
                     val clientRequests = data.filter { it.clientName == clientName }
 
-                    adapter.updateData(clientRequests)
+                    //adapter.updateData(clientRequests)
                 } else {
                     Toast.makeText(requireContext(), "Failed to load requests", Toast.LENGTH_SHORT).show()
                 }
