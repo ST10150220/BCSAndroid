@@ -43,6 +43,11 @@
             android:name=".ClientDashboardActivity"
             android:exported="false"
             android:theme="@style/Theme.BCSApp" />
+
+        <activity
+            android:name=".AdminReportActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BCSApp" />
     </application>
 
 </manifest>

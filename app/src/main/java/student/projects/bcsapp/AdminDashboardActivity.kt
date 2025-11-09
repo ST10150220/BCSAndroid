@@ -18,5 +18,10 @@ class AdminDashboardActivity : AppCompatActivity() {
             startActivity(Intent(this, RegisterUserActivity::class.java))
             finish()
         }
+
+        btnReport.setOnClickListener {
+            startActivity((Intent(this, AdminReportActivity::class.java)))
+            finish()
+        }
     }
 }
