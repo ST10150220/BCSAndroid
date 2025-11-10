@@ -38,6 +38,13 @@ class ClientDashboardActivity : AppCompatActivity() {
                     if (doc != null && doc.exists()) {
                         clientName = doc.getString("name") ?: ""
                         clientEmail = doc.getString("email") ?: ""
+
+                        // Save clientEmail to SharedPreferences so fragments can use it
+                        val sharedPrefs = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+                        sharedPrefs.edit()
+                            .putString("userEmail", clientEmail)
+                            .apply()
+
                         loadDefaultFragment()
                     } else {
                         Toast.makeText(this, "User data not found", Toast.LENGTH_SHORT).show()
@@ -56,6 +63,7 @@ class ClientDashboardActivity : AppCompatActivity() {
     private fun loadDefaultFragment() {
         if (supportFragmentManager.findFragmentById(binding.fragmentContainer.id) == null) {
             supportFragmentManager.commit {
+                // Pass clientEmail instead of clientName
                 replace(binding.fragmentContainer.id, RequestFormFragment.newInstance(clientEmail))
             }
         }
@@ -66,7 +74,8 @@ class ClientDashboardActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.nav_request_form -> {
                     supportFragmentManager.commit {
-                        replace(binding.fragmentContainer.id, RequestFormFragment.newInstance(clientName))
+                        // Pass clientEmail instead of clientName
+                        replace(binding.fragmentContainer.id, RequestFormFragment.newInstance(clientEmail))
                     }
                     true
                 }
