@@ -1,58 +1,32 @@
 package student.projects.bcsapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import network.ApiClient
-import network.ApiService
-import network.MaintenanceResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ProjectManagerDashboardActivity : AppCompatActivity() {
 
-    private lateinit var recyclerRequests: RecyclerView
-    private lateinit var adapter: MaintenanceAdapter
-    private lateinit var apiService: ApiService
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_project_manager_dashboard)
+        setContentView(R.layout.activity_project_manager_dashboard_host)
 
-        recyclerRequests = findViewById(R.id.recyclerRequests)
-        recyclerRequests.layoutManager = LinearLayoutManager(this)
+        // Load default fragment
+        replaceFragment(ProjectManagerDashboardFragment())
 
-        adapter = MaintenanceAdapter(emptyList())
-        recyclerRequests.adapter = adapter
-
-        apiService = ApiClient.instance.create(ApiService::class.java)
-
-        loadMaintenanceRequests()
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNav.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.navigation_dashboard -> replaceFragment(ProjectManagerDashboardFragment())
+                // placeholder
+            }
+            true
+        }
     }
 
-    private fun loadMaintenanceRequests() {
-        Log.d("API_DEBUG", "Starting API call to get maintenance requests...")
-
-        apiService.getAllMaintenance().enqueue(object : Callback<MaintenanceResponse> {
-            override fun onResponse(
-                call: Call<MaintenanceResponse>,
-                response: Response<MaintenanceResponse>
-            ) {
-                if (response.isSuccessful && response.body() != null) {
-                    val maintenanceList = response.body()!!.data
-                    Log.d("API_DEBUG", "Received ${maintenanceList.size} items")
-                    adapter.setData(maintenanceList)
-                } else {
-                    Log.e("API_ERROR", "Failed to get requests: ${response.code()}")
-                }
-            }
-
-            override fun onFailure(call: Call<MaintenanceResponse>, t: Throwable) {
-                Log.e("API_FAILURE", "Error loading requests: ${t.message}")
-            }
-        })
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
     }
 }

@@ -51,4 +51,11 @@
         <item>Completed</item>
     </string-array>
 
+    <string-array name="status_array">
+        <item>All</item>
+        <item>Pending</item>
+        <item>In Progress</item>
+        <item>Completed</item>
+    </string-array>
+
 </resources>
