@@ -6,11 +6,11 @@ data class MaintenanceResponse(
 )
 data class Maintenance(
     val id: String,
-    val clientName: String?,      // nullable because some items have title instead
-    val title: String?,           // for items that use title
+    val clientName: String?,
+    val title: String?,
     val description: String,
-    val imageUrl: String?,        // for single-image items
-    val images: List<String>?,    // for items with multiple images
+    val imageUrl: String?,
+    val images: List<String>?,
     val assignedContractor: String?,
     val assignedTo: String?,
     val status: String,

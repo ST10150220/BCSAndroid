@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import network.Maintenance
 
-
 class ClientRequestAdapter(private var requests: List<Maintenance>) :
     RecyclerView.Adapter<ClientRequestAdapter.RequestViewHolder>() {
 
@@ -15,6 +14,7 @@ class ClientRequestAdapter(private var requests: List<Maintenance>) :
         val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
         val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
         val tvStatus: TextView = itemView.findViewById(R.id.tvStatus)
+        val tvCreatedAt: TextView = itemView.findViewById(R.id.tvCreatedAt) // NEW
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RequestViewHolder {
@@ -26,8 +26,9 @@ class ClientRequestAdapter(private var requests: List<Maintenance>) :
     override fun onBindViewHolder(holder: RequestViewHolder, position: Int) {
         val request = requests[position]
         holder.tvTitle.text = request.title ?: "Maintenance Request"
-        holder.tvDescription.text = request.description
-        holder.tvStatus.text = "Status: ${request.status}"
+        holder.tvDescription.text = request.description ?: "No description"
+        holder.tvStatus.text = "Status: ${request.status ?: "Unknown"}"
+        holder.tvCreatedAt.text = request.createdAt?.let { "Created: $it" } ?: ""
     }
 
     override fun getItemCount() = requests.size

@@ -5,6 +5,9 @@ import retrofit2.Call
 import retrofit2.http.*
 interface ApiService {
 
+    data class AssignContractorRequest(
+        val contractorName: String
+    )
     // -------- MAINTENANCE --------
     @GET("maintenance/all")
     fun getAllMaintenance(): Call<MaintenanceResponse>
@@ -14,8 +17,8 @@ interface ApiService {
 
     @PATCH("maintenance/assign/{id}")
     fun assignContractor(
-        @Path("id") id: String,
-        @Body contractor: Map<String, String>
+        @Path("id") maintenanceId: String,
+        @Body body: AssignContractorRequest
     ): Call<Void>
 
     @PATCH("maintenance/update/{id}")

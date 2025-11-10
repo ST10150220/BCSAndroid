@@ -7,5 +7,5 @@
     <item
         android:id="@+id/navigation_other"
         android:icon="@android:drawable/ic_menu_manage"
-        android:title="Other" />
+        android:title="Assign" />
 </menu>
