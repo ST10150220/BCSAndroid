@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_contractor_home"
+        android:title="Home"/>
+    <item
+        android:id="@+id/nav_progress"
+        android:title="Progress"/>
+    <item
+        android:id="@+id/nav_completion"
+        android:title="Completion"/>
+</menu>
