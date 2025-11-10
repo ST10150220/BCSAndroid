@@ -44,7 +44,7 @@
         app:layout_constraintVertical_bias="0.427" />
 
     <TextView
-        android:id="@+id/selectedFiles"
+        android:id="@+id/tvSelectedFiles"
         android:layout_width="214dp"
         android:layout_height="89dp"
         android:text="Selected File"
