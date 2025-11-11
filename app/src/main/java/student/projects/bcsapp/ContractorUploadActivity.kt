@@ -1,7 +1,6 @@
 package student.projects.bcsapp
 
-import android.app.Activity
-import android.content.Intent
+
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
@@ -10,6 +9,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import retrofit2.http.Url
+import java.util.UUID
 
 class ContractorUploadActivity : AppCompatActivity() {
 
@@ -18,8 +21,9 @@ class ContractorUploadActivity : AppCompatActivity() {
     private lateinit var btnSelectFiles: Button
     private lateinit var tvSelectedFiles: TextView
 
-    private val PICK_FILE_REQUEST = 1
-    private var selectedFiles: MutableList<Uri> = mutableListOf()
+    private val selectedFiles = mutableListOf<Uri>()
+    private val storage = FirebaseStorage.getInstance()
+    private val firestore = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +49,53 @@ class ContractorUploadActivity : AppCompatActivity() {
             pickFilesLauncher.launch(arrayOf("*/*"))
         }
 
+        btnUpload.setOnClickListener {
+            val taskName = etTask.text.toString().trim()
 
+            if (taskName.isEmpty()){
+                Toast.makeText(this, "Please Enter a task", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
+            if (selectedFiles.isEmpty()){
+                Toast.makeText(this, "Please Select a file", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            uploadFiles(taskName)
+        }
+    }
+
+    private fun uploadFiles(taskName: String) {
+        for (fileUri in selectedFiles) {
+            val fileName = UUID.randomUUID().toString()
+            val storageRef = storage.reference.child("contractor_uploads/$fileName")
+            val uploadTask = storageRef.putFile(fileUri)
+
+            uploadTask.addOnSuccessListener {
+                storageRef.downloadUrl.addOnSuccessListener { uri ->
+                    saveFileUrl(taskName, uri.toString())
+                }
+
+            }.addOnFailureListener { e ->
+                Toast.makeText(this, "Upload failed: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun saveFileUrl (taskName: String, fileUrl: String){
+        val fileData = hashMapOf(
+            "taskName" to taskName,
+            "fileUrl" to fileUrl,
+          //  "timestamp" to System.currentTimeMillis()
+        )
+
+        firestore.collection("reports")
+            .add(fileData)
+            .addOnSuccessListener {
+                Toast.makeText(this, "File uploaded successfully!", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Failed to save file info: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 }
