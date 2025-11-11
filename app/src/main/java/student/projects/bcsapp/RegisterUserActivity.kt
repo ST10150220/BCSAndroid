@@ -52,7 +52,7 @@ class RegisterUserActivity : AppCompatActivity() {
                             "email" to email,
                             "role" to role
                         )
-
+//test
                         db.collection("Users").document(userId).set(user)
                             .addOnSuccessListener {
                                 Toast.makeText(this, "User Registered Successfully", Toast.LENGTH_SHORT).show()
