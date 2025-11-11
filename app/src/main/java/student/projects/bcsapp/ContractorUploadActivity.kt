@@ -90,16 +90,17 @@ class ContractorUploadActivity : AppCompatActivity() {
         val fileData = hashMapOf(
             "taskName" to taskName,
             "fileName" to fileName,
-            "fileData" to blob
+            "fileData" to blob,
+            "status" to "pending"
         )
 
         firestore.collection("reports")
             .add(fileData)
             .addOnSuccessListener {
-                Toast.makeText(this, "File uploaded successfully!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "File uploaded successfully", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Failed to save file info: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Failed to save file: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 }
