@@ -14,6 +14,6 @@ data class Maintenance(
     val assignedContractor: String?,
     val assignedTo: String?,
     val status: String,
-    val createdAt: String?,
-    val updatedAt: String?
+    val createdAt: Any?,
+    val updatedAt: Any?
 )

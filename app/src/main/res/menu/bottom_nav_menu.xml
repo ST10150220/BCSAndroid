@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_dashboard"
@@ -8,4 +7,8 @@
         android:id="@+id/navigation_other"
         android:icon="@android:drawable/ic_menu_manage"
         android:title="Assign" />
+    <item
+        android:id="@+id/navigation_update_reports"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="Update Reports" />
 </menu>

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import student.projects.bcsapp.projectmanager.ProjectManagerUpdateReportFragment
 
 class ProjectManagerDashboardActivity : AppCompatActivity() {
 
@@ -26,11 +27,12 @@ class ProjectManagerDashboardActivity : AppCompatActivity() {
             when(item.itemId) {
                 R.id.navigation_dashboard -> replaceFragment(ProjectManagerDashboardFragment())
                 R.id.navigation_other -> replaceFragment(AssignContractorFragment())
+                R.id.navigation_update_reports -> replaceFragment(ProjectManagerUpdateReportFragment())
+                else -> false
             }
             true
         }
 
-        // ---- DYNAMIC NAME LOGIC ----
         val tvUserName = findViewById<TextView>(R.id.tvUserName)
         val tvGreeting = findViewById<TextView>(R.id.tvGreeting)
 

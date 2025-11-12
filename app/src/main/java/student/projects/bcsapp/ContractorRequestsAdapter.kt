@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import network.MaintenanceRequest
 import student.projects.bcsapp.R
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ContractorRequestsAdapter(
     private val requests: List<MaintenanceRequest>,
@@ -34,7 +37,18 @@ class ContractorRequestsAdapter(
         holder.tvClientName.text = req.clientName
         holder.tvDescription.text = req.description
         holder.tvStatus.text = "Status: ${req.status}"
-        holder.tvCreatedAt.text = req.createdAt ?: "N/A"
+        val createdAtFormatted = when (val dateValue = req.createdAt) {
+            is String -> dateValue
+            is Map<*, *> -> {
+                val seconds = (dateValue["_seconds"] as? Number)?.toLong() ?: 0L
+                val date = Date(seconds * 1000)
+                SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(date)
+            }
+            else -> "Unknown"
+        }
+
+        holder.tvCreatedAt.text = createdAtFormatted
+
 
         if (!req.imageUrl.isNullOrEmpty()) {
             holder.imageRequest.visibility = View.VISIBLE

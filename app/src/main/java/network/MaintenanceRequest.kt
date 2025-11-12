@@ -10,6 +10,6 @@ data class MaintenanceRequest(
     val description: String = "",
     val status: String = "",
     val imageUrl: String? = null,
-    val createdAt: String? = null,
+    val createdAt: Any? = null,
     val assignedContractor: String? = null
 )
