@@ -3,70 +3,93 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F8FAFC"
+    android:padding="16dp">
 
-    <Button
-        android:id="@+id/btnUpload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Upload"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.877"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.831" />
-
+    <!-- Task Input -->
     <EditText
         android:id="@+id/etTask"
-        android:layout_width="221dp"
+        android:layout_width="0dp"
         android:layout_height="56dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Task"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.263"
-        app:layout_constraintStart_toStartOf="parent"
+        android:hint="Enter the Tasks name"
+        android:padding="14dp"
+        android:background="@drawable/form_input_bg"
+        android:textColor="#1E293B"
+        android:textColorHint="#94A3B8"
+        android:fontFamily="sans-serif"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.173" />
-
-    <Button
-        android:id="@+id/btnSelectFiles"
-        android:layout_width="113dp"
-        android:layout_height="62dp"
-        android:text="Select Files"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.427" />
-
-    <TextView
-        android:id="@+id/tvSelectedFiles"
-        android:layout_width="214dp"
-        android:layout_height="89dp"
-        android:text="Selected File"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.253"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.647" />
+        app:layout_constraintBottom_toTopOf="@id/etContractor"
+        android:layout_marginBottom="24dp"/>
 
+    <!-- Contractor Input -->
     <EditText
         android:id="@+id/etContractor"
-        android:layout_width="225dp"
+        android:layout_width="0dp"
         android:layout_height="56dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Contractor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.268"
+        android:hint="Please enter your Name"
+        android:padding="14dp"
+        android:background="@drawable/form_input_bg"
+        android:textColor="#1E293B"
+        android:textColorHint="#94A3B8"
+        android:fontFamily="sans-serif"
+        app:layout_constraintTop_toBottomOf="@id/etTask"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.312" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnSelectFiles"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Select Files Button -->
+    <Button
+        android:id="@+id/btnSelectFiles"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:text="Select Files"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/form_button_bg"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintTop_toBottomOf="@id/etContractor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvSelectedFiles"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Selected Files Display -->
+    <TextView
+        android:id="@+id/tvSelectedFiles"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Selected File"
+        android:textColor="#475569"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:padding="12dp"
+        android:background="@drawable/form_input_bg"
+        app:layout_constraintTop_toBottomOf="@id/btnSelectFiles"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnUpload"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Upload Button -->
+    <Button
+        android:id="@+id/btnUpload"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:text="Upload"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/form_button_bg"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintTop_toBottomOf="@id/tvSelectedFiles"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

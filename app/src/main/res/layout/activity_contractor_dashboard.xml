@@ -1,41 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contractorDashboardRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ContractorUploadActivity">
+    android:orientation="vertical"
+    android:background="#F5F7FB">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="183dp"
-        android:layout_height="58dp"
-        android:text="Contractor"
-        android:textAlignment="center"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.037" />
+    <!-- HEADER SECTION -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@drawable/bg_header_gradient"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        android:padding="20dp">
 
+        <TextView
+            android:id="@+id/tvGreeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Good Morning,"
+            android:textColor="@android:color/white"
+            android:textSize="16dp"
+            android:layout_marginTop="24dp"/>
+
+        <TextView
+            android:id="@+id/tvContractorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- FRAGMENT CONTAINER -->
+    <FrameLayout
+        android:id="@+id/contractor_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="12dp"
+        android:paddingHorizontal="16dp"
+        android:clipToPadding="false" />
+
+    <!-- BOTTOM NAVIGATION -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
+        android:id="@+id/contractor_bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/menu_contractor_dashboard"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-
-    <Button
-        android:id="@+id/btnTemp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Upload Temp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:menu="@menu/menu_contractor_nav"
+        android:background="@android:color/white"
+        app:labelVisibilityMode="labeled"
+        android:elevation="10dp" />
+</LinearLayout>
