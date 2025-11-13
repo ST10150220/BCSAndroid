@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import network.ApiClient
+
 import network.ApiService
 import network.MaintenanceRequest
 import network.MaintenanceResponse
@@ -44,7 +44,6 @@ class ProjectManagerDashboardFragment : Fragment() {
         etSearch = view.findViewById(R.id.etSearch)
         spinnerStatus = view.findViewById(R.id.spinnerStatus)
 
-        // ✅ Populate spinner with status_array
         val statusAdapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,

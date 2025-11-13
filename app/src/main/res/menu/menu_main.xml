@@ -1,8 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_request_form"
-        android:title="New Request"/>
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="Request" />
+
     <item
         android:id="@+id/nav_my_requests"
-        android:title="My Requests"/>
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="My Requests" />
+
+    <item
+        android:id="@+id/navigation_logout"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:title="Logout" />
 </menu>

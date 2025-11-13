@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.DialogFragment
-import network.ApiClient
+
 import network.ApiService
 import retrofit2.Call
 import retrofit2.Callback

@@ -1,8 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_view_requests"
+        android:icon="@android:drawable/ic_menu_agenda"
         android:title="Requests" />
     <item
         android:id="@+id/nav_upload_report"
+        android:icon="@android:drawable/ic_menu_upload"
         android:title="Upload" />
+    <item
+        android:id="@+id/navigation_logout"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:title="Logout" />
 </menu>

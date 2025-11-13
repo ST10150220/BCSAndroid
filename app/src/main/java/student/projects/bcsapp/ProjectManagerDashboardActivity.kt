@@ -8,12 +8,16 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import student.projects.bcsapp.projectmanager.LogoutFragment
 import student.projects.bcsapp.projectmanager.ProjectManagerUpdateReportFragment
 
-class ProjectManagerDashboardActivity : AppCompatActivity() {
+class ProjectManagerDashboardActivity : AppCompatActivity(),
+    LogoutFragment.LogoutListener {
 
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
+
+    private var currentItemId: Int = R.id.navigation_dashboard
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,13 +28,32 @@ class ProjectManagerDashboardActivity : AppCompatActivity() {
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNav.setOnItemSelectedListener { item ->
-            when(item.itemId) {
-                R.id.navigation_dashboard -> replaceFragment(ProjectManagerDashboardFragment())
-                R.id.navigation_other -> replaceFragment(AssignContractorFragment())
-                R.id.navigation_update_reports -> replaceFragment(ProjectManagerUpdateReportFragment())
+            when (item.itemId) {
+                R.id.navigation_dashboard -> {
+                    currentItemId = item.itemId
+                    replaceFragment(ProjectManagerDashboardFragment())
+                    true
+                }
+
+                R.id.navigation_other -> {
+                    currentItemId = item.itemId
+                    replaceFragment(AssignContractorFragment())
+                    true
+                }
+
+                R.id.navigation_update_reports -> {
+                    currentItemId = item.itemId
+                    replaceFragment(ProjectManagerUpdateReportFragment())
+                    true
+                }
+
+                R.id.navigation_logout -> {
+                    replaceFragment(LogoutFragment())
+                    false
+                }
+
                 else -> false
             }
-            true
         }
 
         val tvUserName = findViewById<TextView>(R.id.tvUserName)
@@ -55,12 +78,16 @@ class ProjectManagerDashboardActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show()
         }
-        // ------------------------------
     }
 
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
             .commit()
+    }
+
+    override fun onLogoutCancelled() {
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNav.selectedItemId = currentItemId
     }
 }

@@ -37,7 +37,7 @@ class AssignContractorFragment : Fragment() {
         maintenanceId = arguments?.getString("maintenanceId")
 
         if (maintenanceId.isNullOrEmpty()) {
-            Toast.makeText(requireContext(), "Invalid maintenance ID", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Please select a Request from the previous page first", Toast.LENGTH_SHORT).show()
             parentFragmentManager.popBackStack()
             return view
         }

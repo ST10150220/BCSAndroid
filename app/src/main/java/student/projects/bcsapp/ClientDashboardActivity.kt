@@ -8,14 +8,16 @@ import androidx.fragment.app.commit
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import student.projects.bcsapp.databinding.ActivityClientDashboardBinding
+import student.projects.bcsapp.projectmanager.LogoutFragment
 
-class ClientDashboardActivity : AppCompatActivity() {
+class ClientDashboardActivity : AppCompatActivity(), LogoutFragment.LogoutListener {
 
     private lateinit var binding: ActivityClientDashboardBinding
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
     private var clientName: String = ""
     private var clientEmail: String = ""
+    private var currentItemId: Int = R.id.nav_request_form
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +65,6 @@ class ClientDashboardActivity : AppCompatActivity() {
     private fun loadDefaultFragment() {
         if (supportFragmentManager.findFragmentById(binding.fragmentContainer.id) == null) {
             supportFragmentManager.commit {
-                // Pass clientEmail instead of clientName
                 replace(binding.fragmentContainer.id, RequestFormFragment.newInstance(clientEmail))
             }
         }
@@ -73,20 +74,33 @@ class ClientDashboardActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_request_form -> {
+                    currentItemId = item.itemId
                     supportFragmentManager.commit {
-                        // Pass clientEmail instead of clientName
                         replace(binding.fragmentContainer.id, RequestFormFragment.newInstance(clientEmail))
                     }
                     true
                 }
-                R.id.nav_my_requests -> { // Add this to your menu
+
+                R.id.nav_my_requests -> {
+                    currentItemId = item.itemId
                     supportFragmentManager.commit {
                         replace(binding.fragmentContainer.id, MyRequestsFragment())
                     }
                     true
                 }
+
+                R.id.navigation_logout -> {
+                    supportFragmentManager.commit {
+                        replace(binding.fragmentContainer.id, LogoutFragment())
+                    }
+                    false
+                }
+
                 else -> false
             }
         }
+    }
+    override fun onLogoutCancelled() {
+        binding.bottomNavigation.selectedItemId = currentItemId
     }
 }

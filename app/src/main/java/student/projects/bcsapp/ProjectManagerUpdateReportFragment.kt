@@ -46,7 +46,6 @@ class ProjectManagerUpdateReportFragment : Fragment() {
 
         loadReports()
 
-        // 🔹 Setup search filter
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 filterReports(query)

@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
-import network.ApiClient
+
 import network.ApiService
 import network.MaintenanceRequest
 import network.MaintenanceResponse
@@ -20,7 +20,6 @@ class RequestFormFragment : Fragment() {
 
     private var _binding: FragmentRequestFormBinding? = null
     private val binding get() = _binding!!
-    //private lateinit var adapter: ClientRequestAdapter
     private var clientName: String = ""
 
     companion object {
@@ -50,15 +49,6 @@ class RequestFormFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        // Initialize RecyclerView adapter
-//        adapter = ClientRequestAdapter(emptyList())
-//        binding.requestsRecyclerView.adapter = adapter
-//
-//        // Load the client's existing requests
-//        fetchClientRequests()
-
-        // Get stored user details from SharedPreferences
         val sharedPrefs = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val storedClientName = sharedPrefs.getString("userName", "") ?: ""
         val email = sharedPrefs.getString("userEmail", "") ?: ""

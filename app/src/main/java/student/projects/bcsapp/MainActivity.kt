@@ -2,16 +2,15 @@ package student.projects.bcsapp
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.ui.AppBarConfiguration
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
-import student.projects.bcsapp.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import android.util.Log
-import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,11 +19,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
+
         val etEmail = findViewById<EditText>(R.id.etEmail)
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
+        val tvForgotPassword = findViewById<TextView>(R.id.tvForgotPassword)
 
         auth = FirebaseAuth.getInstance()
 
@@ -56,11 +56,44 @@ class MainActivity : AppCompatActivity() {
                     ).show()
                     Log.e("AuthError", "Login failed", task.exception)
                 }
+            }
+        }
+        tvForgotPassword.setOnClickListener {
+            showResetPasswordDialog()
+        }
+    }
+    private fun showResetPasswordDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Reset Password")
+
+        val input = EditText(this)
+        input.hint = "Enter your email"
+        builder.setView(input)
+
+        builder.setPositiveButton("Send") { _, _ ->
+            val email = input.text.toString().trim()
+            if(email.isNotEmpty()) {
+                sendPasswordReset(email)
+            } else {
+                Toast.makeText(this, "Email cannot be empty", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        builder.setNegativeButton("Cancel", null)
+        builder.show()
+    }
+    private fun sendPasswordReset(email: String) {
+        auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Password reset email sent. Check your inbox.", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                 }
             }
+    }
 
-        }
-    private fun checkUserRole (uid: String) {
+    private fun checkUserRole(uid: String) {
         db.collection("Users").document(uid).get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
@@ -99,9 +132,8 @@ class MainActivity : AppCompatActivity() {
                         else -> {
                             Toast.makeText(this, "Error: Unknown role", Toast.LENGTH_SHORT).show()
                         }
-
                     }
-                }else {
+                } else {
                     Toast.makeText(this, "Error: User record not found", Toast.LENGTH_SHORT).show()
                     Log.e("FirestoreError", "No user document found for UID: $uid")
                 }
