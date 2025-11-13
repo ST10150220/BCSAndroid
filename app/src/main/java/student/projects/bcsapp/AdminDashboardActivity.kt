@@ -3,17 +3,15 @@ package student.projects.bcsapp
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
-import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.github.mikephil.charting.charts.PieChart
-import com.google.firebase.auth.FirebaseAuth
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
+import ui.SendMessageFragment
 
 class AdminDashboardActivity : AppCompatActivity() {
 
@@ -30,9 +28,6 @@ class AdminDashboardActivity : AppCompatActivity() {
         btnReport = findViewById<Button>(R.id.btnReport)
         chart = findViewById<PieChart>(R.id.chart)
 
-        val db = FirebaseFirestore.getInstance()
-
-
         btnRegister.setOnClickListener {
             startActivity(Intent(this, RegisterUserActivity::class.java))
             finish()
@@ -44,6 +39,21 @@ class AdminDashboardActivity : AppCompatActivity() {
         }
 
         loadChartData()
+
+        // ---- Handle Messaging Menu ----
+        val navView = findViewById<BottomNavigationView>(R.id.bottomNavigation) // or your menu container
+        navView.setOnNavigationItemSelectedListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.nav_messaging -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, SendMessageFragment())
+                        .addToBackStack(null)
+                        .commit()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun loadChartData() {
@@ -90,5 +100,5 @@ class AdminDashboardActivity : AppCompatActivity() {
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Failed to load data: ${e.message}", Toast.LENGTH_SHORT).show()
             }
-        }
+    }
 }
