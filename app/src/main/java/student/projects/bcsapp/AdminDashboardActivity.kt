@@ -11,13 +11,13 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.github.mikephil.charting.charts.HorizontalBarChart
+import com.github.mikephil.charting.charts.PieChart
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AdminDashboardActivity : AppCompatActivity() {
 
-    private lateinit var chart: HorizontalBarChart
+    private lateinit var chart: PieChart
     private lateinit var btnRegister: Button
     private lateinit var btnReport: Button
     private val db = FirebaseFirestore.getInstance()
@@ -28,7 +28,7 @@ class AdminDashboardActivity : AppCompatActivity() {
 
         btnRegister = findViewById<Button>(R.id.btnRegisterUser)
         btnReport = findViewById<Button>(R.id.btnReport)
-        chart = findViewById<HorizontalBarChart>(R.id.chart)
+        chart = findViewById<PieChart>(R.id.chart)
 
         val db = FirebaseFirestore.getInstance()
 
@@ -62,33 +62,29 @@ class AdminDashboardActivity : AppCompatActivity() {
                 }
 
                 val entries = listOf(
-                    BarEntry(0f, pendingCount.toFloat()),
-                    BarEntry(1f, approvedCount.toFloat())
+                    com.github.mikephil.charting.data.PieEntry(pendingCount.toFloat(), "Pending"),
+                    com.github.mikephil.charting.data.PieEntry(approvedCount.toFloat(), "Approved")
                 )
 
-                val dataSet = BarDataSet(entries, "Maintenance Requests")
-                dataSet.color = Color.parseColor("#4CAF50")
+                val dataSet = com.github.mikephil.charting.data.PieDataSet(entries, "Maintenance Requests")
+                dataSet.colors = listOf(
+                    Color.parseColor("#FFC107"),
+                    Color.parseColor("#4CAF50")
+                )
                 dataSet.valueTextColor = Color.BLACK
-                dataSet.valueTextSize = 12f
+                dataSet.valueTextSize = 14f
 
-                val barData = BarData(dataSet)
-                barData.barWidth = 0.5f
+                val pieData = com.github.mikephil.charting.data.PieData(dataSet)
 
-                chart.data = barData
-
-                val labels = listOf("Pending", "Approved")
-                val xAxis = chart.xAxis
-                xAxis.valueFormatter = IndexAxisValueFormatter(labels)
-                xAxis.position = XAxis.XAxisPosition.BOTTOM
-                xAxis.setDrawGridLines(false)
-                xAxis.textSize = 12f
-                xAxis.labelCount = labels.size
-
-                chart.axisRight.isEnabled = false
+                chart.data = pieData
+                chart.setUsePercentValues(true)
                 chart.description.isEnabled = false
-                chart.legend.isEnabled = true
-                chart.setFitBars(true)
-                chart.animateY(1500)
+                chart.isDrawHoleEnabled = true
+                chart.setHoleColor(Color.WHITE)
+                chart.setEntryLabelColor(Color.BLACK)
+                chart.setEntryLabelTextSize(12f)
+                chart.centerText = "Requests Overview"
+                chart.animateY(1200)
                 chart.invalidate()
             }
             .addOnFailureListener { e ->

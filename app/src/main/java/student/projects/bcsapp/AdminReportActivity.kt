@@ -33,9 +33,10 @@ class AdminReportActivity : AppCompatActivity() {
             val reportType = etReportType.text.toString().trim()
             val createdById = auth.currentUser?.uid ?: "unknown"
 
-            if(title.isEmpty() || description.isEmpty() || reportType.isEmpty())
+            if(title.isEmpty() || description.isEmpty() || reportType.isEmpty()) {
                 Toast.makeText(this, "Please fill in all info", Toast.LENGTH_SHORT).show()
-            return@setOnClickListener
+                return@setOnClickListener
+            }
 
             val reportData = hashMapOf(
                 "title" to title,
