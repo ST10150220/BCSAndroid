@@ -8,6 +8,10 @@
         android:icon="@android:drawable/ic_menu_upload"
         android:title="Upload" />
     <item
+        android:id="@+id/nav_messages"
+        android:icon="@android:drawable/ic_dialog_email"
+        android:title="Messages" />
+    <item
         android:id="@+id/navigation_logout"
         android:icon="@android:drawable/ic_lock_power_off"
         android:title="Logout" />

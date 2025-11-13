@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#FFFFFF"> <!-- make background white -->
+    android:background="#FFFFFF">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -19,11 +19,11 @@
         android:layout_height="wrap_content"
         android:text="No messages yet"
         android:textColor="#000000"
-    android:textStyle="bold"
-    android:textSize="16sp"
-    android:gravity="center"
-    android:visibility="gone"
-    android:padding="8dp" />
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:padding="8dp" />
 
     <ListView
         android:id="@+id/lvMessages"
@@ -31,7 +31,11 @@
         android:layout_height="match_parent"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp"
-        android:background="#FFFFFF"
-    android:cacheColorHint="#FFFFFF"
-    android:listSelector="@android:color/darker_gray" />
+        android:background="#F8FAFC"
+        android:clipToPadding="false"
+        android:padding="8dp"
+        android:layout_marginTop="12dp"
+        android:listSelector="@android:color/holo_blue_light"
+        android:overScrollMode="ifContentScrolls"
+        android:scrollbars="vertical"/>
 </LinearLayout>

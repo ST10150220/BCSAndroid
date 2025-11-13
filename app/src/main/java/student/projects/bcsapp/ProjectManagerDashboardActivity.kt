@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import student.projects.bcsapp.projectmanager.LogoutFragment
 import student.projects.bcsapp.projectmanager.ProjectManagerUpdateReportFragment
+import student.projects.bcsapp.ui.messages.MessagesFragment
 
 class ProjectManagerDashboardActivity : AppCompatActivity(),
     LogoutFragment.LogoutListener {
@@ -44,6 +45,11 @@ class ProjectManagerDashboardActivity : AppCompatActivity(),
                 R.id.navigation_update_reports -> {
                     currentItemId = item.itemId
                     replaceFragment(ProjectManagerUpdateReportFragment())
+                    true
+                }
+                R.id.nav_messages -> {
+                    currentItemId = item.itemId
+                    replaceFragment(MessagesFragment())
                     true
                 }
 

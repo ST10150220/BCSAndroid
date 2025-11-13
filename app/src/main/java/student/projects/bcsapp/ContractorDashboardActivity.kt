@@ -8,6 +8,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import student.projects.bcsapp.contractor.ContractorRequestsFragment
 import student.projects.bcsapp.contractor.ContractorUploadFragment
 import student.projects.bcsapp.projectmanager.LogoutFragment
+import student.projects.bcsapp.ui.messages.MessagesFragment
 
 class ContractorDashboardActivity : AppCompatActivity(),
     LogoutFragment.LogoutListener {
@@ -38,6 +39,11 @@ class ContractorDashboardActivity : AppCompatActivity(),
                 R.id.nav_upload_report -> {
                     currentItemId = item.itemId
                     loadFragment(ContractorUploadFragment())
+                    true
+                }
+                R.id.nav_messages -> {
+                    currentItemId = item.itemId
+                    loadFragment(MessagesFragment())
                     true
                 }
                 R.id.navigation_logout -> {
