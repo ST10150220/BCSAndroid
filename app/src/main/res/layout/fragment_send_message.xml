@@ -2,63 +2,98 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="#F8FAFC"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="32dp"
+        android:gravity="center_horizontal">
 
         <TextView
-            android:id="@+id/tvSelectUser"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select a user to send a message to:"
+            android:text="Send a Message"
+            android:textColor="#0F172A"
+            android:textSize="22sp"
             android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginBottom="28dp"
+            android:textAlignment="center" />
 
-        <ListView
-            android:id="@+id/lvUsers"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:divider="@android:color/darker_gray"
-            android:dividerHeight="1dp"
-            android:scrollbars="vertical"
-            android:overScrollMode="ifContentScrolls"
-            android:nestedScrollingEnabled="true" />
+            android:background="@drawable/form_container_bg"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:layout_marginBottom="32dp"
+            android:elevation="6dp">
 
-        <TextView
-            android:id="@+id/tvSelectedUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="No user selected"
-            android:textStyle="italic"
-            android:layout_marginBottom="12dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select User"
+                android:textColor="#475569"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginBottom="6dp" />
 
-        <EditText
-            android:id="@+id/etSubject"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Subject"
-            android:layout_marginBottom="8dp" />
+            <ListView
+                android:id="@+id/lvUsers"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="1dp"
+                android:layout_marginBottom="20dp" />
 
-        <EditText
-            android:id="@+id/etBody"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Message body"
-            android:inputType="textMultiLine"
-            android:minLines="4"
-            android:gravity="top"
-            android:layout_marginBottom="16dp" />
+            <TextView
+                android:id="@+id/tvSelectedUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No user selected"
+                android:textColor="#475569"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                android:layout_marginBottom="20dp" />
 
-        <Button
-            android:id="@+id/btnSend"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Send Message"
-            android:textColor="@android:color/white" />
+            <EditText
+                android:id="@+id/etSubject"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Subject"
+                android:background="@drawable/form_input_bg"
+                android:padding="14dp"
+                android:textColor="#1E293B"
+                android:textColorHint="#94A3B8"
+                android:layout_marginBottom="20dp" />
+
+            <EditText
+                android:id="@+id/etBody"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:hint="Message body"
+                android:background="@drawable/form_input_bg"
+                android:gravity="top|start"
+                android:padding="14dp"
+                android:textColor="#1E293B"
+                android:textColorHint="#94A3B8"
+                android:inputType="textMultiLine"
+                android:layout_marginBottom="28dp" />
+
+            <Button
+                android:id="@+id/btnSend"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Send Message"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-medium"
+                android:background="@drawable/form_button_bg"/>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

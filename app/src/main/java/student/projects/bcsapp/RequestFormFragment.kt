@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
-
 import network.ApiService
 import network.MaintenanceRequest
 import network.MaintenanceResponse

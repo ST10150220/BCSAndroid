@@ -1,49 +1,89 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F8FAFC"
+    android:fillViewport="true">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="32dp"
+        android:gravity="center_horizontal">
 
-        <EditText
-            android:id="@+id/etName"
-            android:hint="Full Name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register New User"
+            android:textColor="#0F172A"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginBottom="28dp"
+            android:textAlignment="center" />
 
-        <EditText
-            android:id="@+id/etEmail"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            android:background="@drawable/form_container_bg"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:layout_marginBottom="32dp"
+            android:elevation="6dp">
 
-        <EditText
-            android:id="@+id/etPassword"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            <EditText
+                android:id="@+id/etName"
+                android:hint="Full Name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/form_input_bg"
+                android:padding="14dp"
+                android:textColor="#1E293B"
+                android:textColorHint="#94A3B8"
+                android:layout_marginBottom="16dp"/>
 
-        <Spinner
-            android:id="@+id/spinnerRole"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" />
+            <EditText
+                android:id="@+id/etEmail"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/form_input_bg"
+                android:padding="14dp"
+                android:textColor="#1E293B"
+                android:textColorHint="#94A3B8"
+                android:layout_marginBottom="16dp"/>
 
-        <Button
-            android:id="@+id/btnRegister"
-            android:text="Register"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"/>
+            <EditText
+                android:id="@+id/etPassword"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/form_input_bg"
+                android:padding="14dp"
+                android:textColor="#1E293B"
+                android:textColorHint="#94A3B8"
+                android:layout_marginBottom="16dp"/>
 
+            <Spinner
+                android:id="@+id/spinnerRole"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/form_input_bg"
+                android:layout_marginBottom="28dp" />
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Register"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-medium"
+                android:background="@drawable/form_button_bg"/>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
