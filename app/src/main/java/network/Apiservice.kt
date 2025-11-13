@@ -8,19 +8,28 @@ interface ApiService {
     data class AssignContractorRequest(
         val contractorName: String
     )
-<<<<<<< Updated upstream
-    // -------- MAINTENANCE --------S
-=======
 
     data class SendMessageRequest(
         val body: String,
-        val projectId: String,
+        val projectId: String?,
         val receiverId: String,
+        val senderId: String,
         val subject: String
     )
 
+    data class Message(
+        val id: String,
+        val senderId: String,
+        val receiverId: String,
+        val projectId: String?,
+        val subject: String,
+        val body: String,
+        var isRead: Boolean,
+        val createdAt: String
+    )
+
     // -------- MAINTENANCE --------
->>>>>>> Stashed changes
+
     @GET("maintenance/all")
     fun getAllMaintenance(): Call<MaintenanceResponse>
 
@@ -44,4 +53,10 @@ interface ApiService {
 
     @POST("messages/send")
     fun sendMessage(@Body request: SendMessageRequest): Call<Void>
+
+    @GET("messages/user/{userId}")
+    fun getUserMessages(@Path("userId") userId: String): Call<MessagesResponse>
+
+    @PUT("messages/read/{messageId}")
+    fun markMessageRead(@Path("messageId") messageId: String): Call<Void>
 }

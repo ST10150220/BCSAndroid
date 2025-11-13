@@ -35,35 +35,39 @@ class AdminReportFragment : Fragment() {
         btnSubmit = view.findViewById(R.id.btnSubmit)
 
         btnSubmit.setOnClickListener {
-            val title = etTitle.text.toString().trim()
-            val description = etDescription.text.toString().trim()
-            val reportType = etReportType.text.toString().trim()
-            val createdById = auth.currentUser?.uid ?: "unknown"
-
-            if (title.isEmpty() || description.isEmpty() || reportType.isEmpty()) {
-                Toast.makeText(requireContext(), "Please fill in all info", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            val reportData = hashMapOf(
-                "title" to title,
-                "description" to description,
-                "reportType" to reportType,
-                "createdAt" to Timestamp.now(),
-                "createdById" to createdById
-            )
-
-            db.collection("AdminReports").add(reportData)
-                .addOnSuccessListener {
-                    Toast.makeText(requireContext(), "Report Submitted", Toast.LENGTH_SHORT).show()
-                    clearFields()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(requireContext(), "Report could not be submitted", Toast.LENGTH_SHORT).show()
-                }
+            submitReport()
         }
 
         return view
+    }
+
+    private fun submitReport() {
+        val title = etTitle.text.toString().trim()
+        val description = etDescription.text.toString().trim()
+        val reportType = etReportType.text.toString().trim()
+        val createdById = auth.currentUser?.uid ?: "unknown"
+
+        if (title.isEmpty() || description.isEmpty() || reportType.isEmpty()) {
+            Toast.makeText(requireContext(), "Please fill in all info", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val reportData = hashMapOf(
+            "title" to title,
+            "description" to description,
+            "reportType" to reportType,
+            "createdAt" to Timestamp.now(),
+            "createdById" to createdById
+        )
+
+        db.collection("AdminReports").add(reportData)
+            .addOnSuccessListener {
+                Toast.makeText(requireContext(), "Report Submitted", Toast.LENGTH_SHORT).show()
+                clearFields()
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), "Report could not be submitted", Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun clearFields() {

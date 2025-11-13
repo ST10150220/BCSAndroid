@@ -1,35 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical">
+    android:padding="16dp">
 
-    <Spinner
-        android:id="@+id/spinnerUsers"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:id="@+id/etSubject"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Subject"
-        android:layout_marginTop="16dp"/>
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/etBody"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Message body"
-        android:layout_marginTop="8dp"
-        android:inputType="textMultiLine"
-        android:minLines="4"/>
+        <TextView
+            android:id="@+id/tvSelectUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select a user to send a message to:"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
 
-    <Button
-        android:id="@+id/btnSend"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Send Message"
-        android:layout_marginTop="16dp"/>
-</LinearLayout>
+        <ListView
+            android:id="@+id/lvUsers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="1dp"
+            android:scrollbars="vertical"
+            android:overScrollMode="ifContentScrolls"
+            android:nestedScrollingEnabled="true" />
+
+        <TextView
+            android:id="@+id/tvSelectedUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No user selected"
+            android:textStyle="italic"
+            android:layout_marginBottom="12dp" />
+
+        <EditText
+            android:id="@+id/etSubject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Subject"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/etBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Message body"
+            android:inputType="textMultiLine"
+            android:minLines="4"
+            android:gravity="top"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Send Message"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+</ScrollView>

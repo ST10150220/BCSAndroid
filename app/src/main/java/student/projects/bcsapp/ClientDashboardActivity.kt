@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import student.projects.bcsapp.databinding.ActivityClientDashboardBinding
 import student.projects.bcsapp.projectmanager.LogoutFragment
+import student.projects.bcsapp.ui.messages.MessagesFragment
 
 class ClientDashboardActivity : AppCompatActivity(), LogoutFragment.LogoutListener {
 
@@ -85,6 +86,14 @@ class ClientDashboardActivity : AppCompatActivity(), LogoutFragment.LogoutListen
                     currentItemId = item.itemId
                     supportFragmentManager.commit {
                         replace(binding.fragmentContainer.id, MyRequestsFragment())
+                    }
+                    true
+                }
+
+                R.id.nav_messages -> {
+                    currentItemId = item.itemId
+                    supportFragmentManager.commit {
+                        replace(binding.fragmentContainer.id, MessagesFragment.newInstance())
                     }
                     true
                 }

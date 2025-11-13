@@ -1,47 +1,29 @@
 package student.projects.bcsapp
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import com.github.mikephil.charting.charts.PieChart
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
-import ui.SendMessageFragment
+import network.SendMessageFragment
 
 class AdminDashboardActivity : AppCompatActivity() {
 
     private lateinit var chart: PieChart
-    private lateinit var btnRegister: Button
-    private lateinit var btnReport: Button
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_dashboard)
 
-        btnRegister = findViewById<Button>(R.id.btnRegisterUser)
-        btnReport = findViewById<Button>(R.id.btnReport)
-        chart = findViewById<PieChart>(R.id.chart)
-
-        btnRegister.setOnClickListener {
-            startActivity(Intent(this, RegisterUserActivity::class.java))
-            finish()
-        }
-
-        btnReport.setOnClickListener {
-            startActivity((Intent(this, AdminReportActivity::class.java)))
-            finish()
-        }
+        chart = findViewById(R.id.chart)
 
         loadChartData()
 
-        // ---- Handle Messaging Menu ----
-        val navView = findViewById<BottomNavigationView>(R.id.bottomNavigation) // or your menu container
+        val navView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         navView.setOnNavigationItemSelectedListener { item: MenuItem ->
             when (item.itemId) {
                 R.id.nav_messaging -> {
@@ -49,6 +31,24 @@ class AdminDashboardActivity : AppCompatActivity() {
                         .replace(R.id.fragmentContainer, SendMessageFragment())
                         .addToBackStack(null)
                         .commit()
+                    true
+                }
+                R.id.nav_reports -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, AdminReportFragment())
+                        .addToBackStack(null)
+                        .commit()
+                    true
+                }
+                R.id.nav_register_user -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainer, RegisterUserFragment())
+                        .addToBackStack(null)
+                        .commit()
+                    true
+                }
+                R.id.nav_admin_dashboard -> {
+                    supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
                     true
                 }
                 else -> false
