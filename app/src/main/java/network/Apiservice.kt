@@ -8,7 +8,7 @@ interface ApiService {
     data class AssignContractorRequest(
         val contractorName: String
     )
-    // -------- MAINTENANCE --------
+    // -------- MAINTENANCE --------S
     @GET("maintenance/all")
     fun getAllMaintenance(): Call<MaintenanceResponse>
 

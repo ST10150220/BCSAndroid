@@ -32,7 +32,6 @@ class ContractorRequestsFragment : Fragment() {
         tvNoRequests = view.findViewById(R.id.tvNoRequests)
 
         adapter = ContractorRequestsAdapter(requests) { selectedRequest ->
-            // 🔹 Show update status dialog
             val dialog = ContractorUpdateStatusDialog().apply {
                 arguments = Bundle().apply {
                     putString("requestId", selectedRequest.id)
