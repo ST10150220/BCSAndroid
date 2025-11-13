@@ -16,7 +16,7 @@ class MyRequestsFragment : Fragment() {
 
     private lateinit var adapter: ClientRequestAdapter
     private val repository = MaintenanceRepository()
-    private val requests = mutableListOf<Maintenance>() // changed type to Maintenance
+    private val requests = mutableListOf<Maintenance>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -41,13 +41,11 @@ class MyRequestsFragment : Fragment() {
 
         repository.getClientMaintenanceRequests(clientEmail) { list ->
             Log.d("MyRequestsFragment", "Received ${list.size} requests")
-
-            // Convert MaintenanceRequest -> Maintenance for the adapter
             val convertedList = list.map { request ->
                 Maintenance(
                     id = request.id,
                     clientName = request.clientName,
-                    title = "Maintenance Request", // or use a field from request if you have it
+                    title = "Maintenance Request",
                     description = request.description,
                     imageUrl = request.imageUrl,
                     images = null,
